@@ -7,21 +7,27 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies and Build Outputs
+node_modules/
+dist/
+dist-ssr/
+/build/
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-!.vscode/
+
+# VS Code specific rules
+# (Ignore the folder structure, but explicitly track settings and extensions)
+.vscode/
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# React Router
+/.react-router/
