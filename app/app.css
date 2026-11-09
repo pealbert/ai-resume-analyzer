@@ -21,18 +21,18 @@
 
 html,
 body {
-	@apply bg-white;
+	@apply w-full max-w-full bg-white;
 }
 
 main {
-	@apply min-h-screen pt-10;
+	@apply min-h-screen w-full max-w-full bg-[#eaf2ff] pt-4 sm:pt-6 lg:pt-10;
 }
 h1 {
-	@apply text-gradient text-6xl leading-tight font-semibold tracking-[-2px];
+	@apply text-gradient text-4xl leading-tight font-semibold tracking-[-1px] sm:text-5xl sm:tracking-[-1.5px] lg:text-6xl lg:tracking-[-2px];
 }
 
 h2 {
-	@apply text-3xl text-dark-200;
+	@apply text-xl leading-snug text-dark-200 sm:text-2xl lg:text-3xl;
 }
 
 label {
@@ -73,24 +73,32 @@ form {
 		@apply flex flex-row items-center gap-2 rounded-lg border border-gray-200 p-2 shadow-sm;
 	}
 	.auth-button {
-		@apply w-150 cursor-pointer rounded-full px-8 py-4 text-3xl font-semibold text-white primary-gradient max-md:w-full;
+		@apply w-full cursor-pointer rounded-full px-6 py-3 text-xl font-semibold text-white primary-gradient sm:px-8 sm:py-4 sm:text-2xl lg:w-150 lg:text-3xl;
 	}
 	.main-section {
-		@apply mx-15 flex flex-col items-center gap-8 pt-12 pb-5;
+		@apply mx-auto flex w-full max-w-[1970px] min-w-0 flex-col items-center gap-6 px-4 pt-8 pb-5 sm:gap-8 sm:px-6 sm:pt-10 lg:px-15 lg:pt-12;
 	}
 	.page-heading {
-		@apply flex max-w-4xl flex-col items-center gap-8 text-center;
+		@apply flex w-full max-w-4xl min-w-0 flex-col items-center gap-4 text-center sm:gap-6 lg:gap-8;
 	}
 	.resumes-section {
-		@apply flex w-full max-w-[1850px] flex-wrap items-start justify-evenly gap-6 max-lg:flex-col;
+		@apply grid w-full max-w-[1850px] min-w-0 grid-cols-1 items-start gap-6 lg:grid-cols-2 2xl:grid-cols-3;
+
+		> * {
+			@apply max-w-full min-w-0;
+		}
 	}
 
 	.resume-card {
-		@apply flex h-140 w-full flex-col gap-8 rounded-2xl bg-white p-4 lg:w-112.5 xl:w-122.5;
+		@apply flex h-auto w-full min-w-0 flex-col gap-5 rounded-2xl bg-white p-3 sm:gap-6 sm:p-4 lg:gap-8;
 	}
 
 	.resume-card-header {
-		@apply flex min-h-27.5 flex-row items-center justify-between gap-2 max-md:items-center max-md:justify-center max-sm:flex-col;
+		@apply flex min-h-0 min-w-0 flex-col items-center justify-center gap-3 text-center sm:min-h-27.5 sm:flex-row sm:justify-between sm:text-left;
+
+		> div:first-child {
+			@apply w-full min-w-0 sm:w-auto;
+		}
 	}
 
 	.feedback-section {
@@ -98,7 +106,19 @@ form {
 	}
 
 	.navbar {
-		@apply mx-auto flex w-full max-w-300 items-center justify-between rounded-full bg-white px-10 py-4 shadow-sm;
+		@apply mx-4 flex w-[calc(100%-2rem)] max-w-300 min-w-0 items-center justify-between gap-2 rounded-full bg-white px-3 py-3 shadow-sm sm:mx-6 sm:w-[calc(100%-3rem)] sm:gap-3 sm:px-6 sm:py-4 lg:mx-auto lg:w-full lg:px-10;
+
+		> a {
+			@apply min-w-0;
+		}
+
+		> a:first-child p {
+			font-size: clamp(1.125rem, 6vw, 1.5rem);
+		}
+
+		.primary-button {
+			@apply shrink px-3 text-center text-sm sm:px-4 sm:text-base;
+		}
 	}
 
 	.score-badge {
