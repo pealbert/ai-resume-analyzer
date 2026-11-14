@@ -1,4 +1,5 @@
 import { useState, type SubmitEvent } from "react";
+import { useNavigate } from "react-router";
 
 import FileUploader from "~/components/FileUploader";
 import Navbar from "~/components/Navbar";
@@ -13,6 +14,7 @@ const Upload = () => {
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [statusText, setStatusText] = useState("");
 	const [file, setFile] = useState<File | null>(null);
+	const navigate = useNavigate();
 
 	const handleFileSelect = (file: File | null) => {
 		setFile(file);
@@ -96,8 +98,8 @@ const Upload = () => {
 			data.feedback = JSON.parse(feedbackText) as Feedback;
 			await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
-			setStatusText("Analysis complete");
-			console.log(data);
+			setStatusText("Analysis complete, redirecting...");
+			void navigate(`/resume/${uuid}`);
 		} catch (error) {
 			const message = error instanceof Error ? error.message : "Unexpected error";
 			setStatusText(`Error: ${message}`);
