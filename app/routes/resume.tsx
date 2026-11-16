@@ -81,8 +81,8 @@ const Resume = () => {
 					{feedback ? (
 						<div className="flex animate-in flex-col gap-8 duration-1000 fade-in">
 							<Summary feedback={feedback} />
-							{/* <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} /> */}
-							{/* <Details feedback={feedback}/> */}
+							<ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
+							<Details feedback={feedback}/>
 						</div>
 					) : (
 						<img src="/images/resume-scan-2.gif" alt="" className="w-full" />
