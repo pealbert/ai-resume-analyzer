@@ -66,7 +66,6 @@ const Upload = () => {
 				jobDescription,
 				feedback: null as Feedback | null,
 			};
-			await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
 			setStatusText("Analyzing...");
 			const response = await ai.feedback(
