@@ -4,9 +4,10 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
+		"build": "react-router typegen && tsc && vp build",
 		"dev": "vp dev",
-		"build": "tsc && vp build",
-		"preview": "vp preview"
+		"preview": "vp preview",
+		"typecheck": "react-router typegen && tsc"
 	},
 	"dependencies": {
 		"@react-router/node": "^8.5.1",
