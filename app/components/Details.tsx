@@ -33,8 +33,8 @@ const ScoreBadge = ({ score }: { score: number }) => {
 
 const CategoryHeader = ({ title, categoryScore }: { title: string; categoryScore: number }) => {
 	return (
-		<div className="flex flex-row items-center gap-4 py-2">
-			<p className="text-2xl font-semibold">{title}</p>
+		<div className="flex flex-wrap items-center gap-2 py-1 sm:gap-4 sm:py-2">
+			<p className="text-xl font-semibold sm:text-2xl">{title}</p>
 			<ScoreBadge score={categoryScore} />
 		</div>
 	);
@@ -47,7 +47,7 @@ const CategoryContent = ({
 }) => {
 	return (
 		<div className="flex w-full flex-col items-center gap-4">
-			<div className="grid w-full grid-cols-2 gap-4 rounded-lg bg-gray-50 px-5 py-4">
+			<div className="grid w-full grid-cols-1 gap-3 rounded-lg bg-gray-50 px-4 py-4 sm:grid-cols-2 sm:gap-4 sm:px-5">
 				{tips.map((tip, index) => (
 					<div className="flex flex-row items-center gap-2" key={index}>
 						<img
@@ -55,7 +55,7 @@ const CategoryContent = ({
 							alt="score"
 							className="size-5"
 						/>
-						<p className="text-xl text-gray-500">{tip.tip}</p>
+						<p className="text-base text-gray-600 sm:text-lg">{tip.tip}</p>
 					</div>
 				))}
 			</div>
@@ -76,7 +76,7 @@ const CategoryContent = ({
 								alt="score"
 								className="size-5"
 							/>
-							<p className="text-xl font-semibold">{tip.tip}</p>
+							<p className="text-lg font-semibold sm:text-xl">{tip.tip}</p>
 						</div>
 						<p>{tip.explanation}</p>
 					</div>
@@ -90,35 +90,35 @@ const Details = ({ feedback }: { feedback: Feedback }) => {
 	return (
 		<div className="flex w-full flex-col gap-4">
 			<Accordion>
-				<AccordionItem id="tone-style">
-					<AccordionHeader itemId="tone-style">
+				<AccordionItem>
+					<AccordionHeader>
 						<CategoryHeader title="Tone & Style" categoryScore={feedback.toneAndStyle.score} />
 					</AccordionHeader>
-					<AccordionContent itemId="tone-style">
+					<AccordionContent>
 						<CategoryContent tips={feedback.toneAndStyle.tips} />
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem id="content">
-					<AccordionHeader itemId="content">
+				<AccordionItem>
+					<AccordionHeader>
 						<CategoryHeader title="Content" categoryScore={feedback.content.score} />
 					</AccordionHeader>
-					<AccordionContent itemId="content">
+					<AccordionContent>
 						<CategoryContent tips={feedback.content.tips} />
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem id="structure">
-					<AccordionHeader itemId="structure">
+				<AccordionItem>
+					<AccordionHeader>
 						<CategoryHeader title="Structure" categoryScore={feedback.structure.score} />
 					</AccordionHeader>
-					<AccordionContent itemId="structure">
+					<AccordionContent>
 						<CategoryContent tips={feedback.structure.tips} />
 					</AccordionContent>
 				</AccordionItem>
-				<AccordionItem id="skills">
-					<AccordionHeader itemId="skills">
+				<AccordionItem>
+					<AccordionHeader>
 						<CategoryHeader title="Skills" categoryScore={feedback.skills.score} />
 					</AccordionHeader>
-					<AccordionContent itemId="skills">
+					<AccordionContent>
 						<CategoryContent tips={feedback.skills.tips} />
 					</AccordionContent>
 				</AccordionItem>

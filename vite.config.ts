@@ -8,7 +8,14 @@ export default defineConfig({
 		tsconfigPaths: true,
 	},
 	fmt: {
-		ignorePatterns: ["node_modules/**", "dist/**"],
+		ignorePatterns: [
+			"node_modules/**",
+			"build/**",
+			"dist/**",
+			".agents/**",
+			".tmp/**",
+			"skills-lock.json",
+		],
 		useTabs: true,
 		singleQuote: false,
 		sortImports: true,
@@ -21,7 +28,7 @@ export default defineConfig({
 	},
 
 	lint: {
-		ignorePatterns: ["node_modules/**", "dist/**"],
+		ignorePatterns: ["node_modules/**", "build/**", "dist/**", ".agents/**", ".tmp/**"],
 		jsPlugins: [
 			{
 				name: "vite-plus",

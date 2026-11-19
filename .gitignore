@@ -1,5 +1,71 @@
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+.npmrc
+.pypirc
+.netrc
+.sentryclirc
+
+# Private keys, certificates, and credential exports
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials.json
+*-credentials.json
+service-account*.json
+secrets.json
+secrets.*.json
+.aws/
+.azure/
+.config/gcloud/
+.ssh/
+
+# Hosting and platform state
+.vercel/
+
+# Dependencies and generated build output
+node_modules/
+build/
+dist/
+dist-ssr/
+.react-router/
+*.tsbuildinfo
+
+# Test and coverage output
+coverage/
+.nyc_output/
+*.lcov
+playwright-report/
+test-results/
+blob-report/
+
+# Tool caches and local agent state
+.cache/
+.tmp/
+tmp/
+temp/
+.vite/
+.eslintcache
+.stylelintcache
+.codex/
+*.local
+
+# Infrastructure state
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraformrc
+terraform.rc
+crash.log
+crash.*.log
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,27 +73,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Dependencies and Build Outputs
-node_modules/
-dist/
-dist-ssr/
-/build/
-*.local
-
-# Editor directories and files
+# Editors and operating systems
 .idea/
+.fleet/
+.history/
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-# VS Code specific rules
-# (Ignore the folder structure, but explicitly track settings and extensions)
-.vscode/
+# Keep shared VS Code configuration while ignoring personal workspace state
+.vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
-
-# React Router
-/.react-router/

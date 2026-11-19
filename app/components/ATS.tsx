@@ -27,10 +27,12 @@ const ATS: React.FC<ATSProps> = ({ score, suggestions }) => {
 	const subtitle = score > 69 ? "Great Job!" : score > 49 ? "Good Start" : "Needs Improvement";
 
 	return (
-		<div className={`bg-linear-to-b ${gradientClass} w-full rounded-2xl to-white p-6 shadow-md`}>
+		<div
+			className={`bg-linear-to-b ${gradientClass} w-full rounded-2xl to-white p-4 shadow-md sm:p-6`}
+		>
 			{/* Top section with icon and headline */}
 			<div className="mb-6 flex items-center gap-4">
-				<img src={iconSrc} alt="ATS Score Icon" className="h-12 w-12" />
+				<img src={iconSrc} alt="" className="size-12" />
 				<div>
 					<h2 className="text-2xl font-bold">ATS Score - {score}/100</h2>
 				</div>

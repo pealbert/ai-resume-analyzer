@@ -14,14 +14,16 @@ export const meta = () => [
 ];
 
 const Auth = () => {
-	const { isLoading, auth } = usePuterStore();
+	const { isLoading, error, auth } = usePuterStore();
 	const location = useLocation();
-	const next = location.search.split("next=")[1];
+	const requestedNext = new URLSearchParams(location.search).get("next");
+	const next =
+		requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/";
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (auth.isAuthenticated) void navigate(next);
-	}, [auth.isAuthenticated, next]);
+		if (auth.isAuthenticated) void navigate(next, { replace: true });
+	}, [auth.isAuthenticated, navigate, next]);
 
 	return (
 		<main className="flex min-h-screen items-center justify-center bg-[url('/images/bg-main.svg')] bg-cover px-4 py-6 sm:px-6 sm:py-8">
@@ -32,22 +34,23 @@ const Auth = () => {
 						<h2>Log In to Continue Your Job Journey</h2>
 					</div>
 					<div className="w-full min-w-0">
+						{error ? (
+							<p role="alert" className="mb-4 rounded-xl bg-red-50 p-3 text-center text-red-800">
+								{error}
+							</p>
+						) : null}
 						{isLoading ? (
-							<button type="button" className="auth-button animate-pulse">
-								<p>Signing you in...</p>
+							<button type="button" className="auth-button animate-pulse" disabled>
+								<span>Checking your account…</span>
+							</button>
+						) : auth.isAuthenticated ? (
+							<button type="button" className="auth-button" onClick={auth.signOut}>
+								Log out
 							</button>
 						) : (
-							<>
-								{auth.isAuthenticated ? (
-									<button type="button" className="auth-button" onClick={auth.signOut}>
-										<p>Log Out</p>
-									</button>
-								) : (
-									<button type="button" className="auth-button" onClick={auth.signIn}>
-										<p>Log In</p>
-									</button>
-								)}
-							</>
+							<button type="button" className="auth-button" onClick={auth.signIn}>
+								Log in with Puter
+							</button>
 						)}
 					</div>
 				</section>

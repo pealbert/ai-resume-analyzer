@@ -1,7 +1,6 @@
 import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
 export interface PdfConversionResult {
-	imageUrl: string;
 	file: File | null;
 	error?: string;
 }
@@ -29,10 +28,14 @@ export async function convertPdfToImage(file: File): Promise<PdfConversionResult
 		const lib = await loadPdfJs();
 
 		const arrayBuffer = await file.arrayBuffer();
-		const pdf = await lib.getDocument({ data: arrayBuffer }).promise;
+		const loadingTask = lib.getDocument({ data: arrayBuffer });
+		const pdf = await loadingTask.promise;
 		const page = await pdf.getPage(1);
 
-		const viewport = page.getViewport({ scale: 4 });
+		const baseViewport = page.getViewport({ scale: 1 });
+		const longestSide = Math.max(baseViewport.width, baseViewport.height);
+		const scale = Math.min(2, 1800 / longestSide);
+		const viewport = page.getViewport({ scale });
 		const canvas = document.createElement("canvas");
 		const context = canvas.getContext("2d");
 
@@ -41,7 +44,6 @@ export async function convertPdfToImage(file: File): Promise<PdfConversionResult
 
 		if (!context) {
 			return {
-				imageUrl: "",
 				file: null,
 				error: "Failed to create a canvas rendering context",
 			};
@@ -52,7 +54,7 @@ export async function convertPdfToImage(file: File): Promise<PdfConversionResult
 
 		await page.render({ canvas, canvasContext: context, viewport }).promise;
 
-		return new Promise((resolve) => {
+		const result = await new Promise<PdfConversionResult>((resolve) => {
 			canvas.toBlob(
 				(blob) => {
 					if (blob) {
@@ -63,24 +65,24 @@ export async function convertPdfToImage(file: File): Promise<PdfConversionResult
 						});
 
 						resolve({
-							imageUrl: URL.createObjectURL(blob),
 							file: imageFile,
 						});
 					} else {
 						resolve({
-							imageUrl: "",
 							file: null,
 							error: "Failed to create image blob",
 						});
 					}
 				},
 				"image/png",
-				1.0,
-			); // Set quality to maximum (1.0)
+				1,
+			);
 		});
+
+		await loadingTask.destroy();
+		return result;
 	} catch (err) {
 		return {
-			imageUrl: "",
 			file: null,
 			error: `Failed to convert PDF: ${err instanceof Error ? err.message : String(err)}`,
 		};

@@ -28,7 +28,9 @@ export default function Home() {
 	const [loadError, setLoadError] = useState("");
 
 	useEffect(() => {
-		if (puterReady && !isLoading && !auth.isAuthenticated) void navigate("/auth?next=/");
+		if (puterReady && !isLoading && !auth.isAuthenticated) {
+			void navigate("/auth?next=/", { replace: true });
+		}
 	}, [auth.isAuthenticated, isLoading, navigate, puterReady]);
 
 	useEffect(() => {
@@ -99,8 +101,13 @@ export default function Home() {
 				</div>
 
 				{loadingResumes && (
-					<div className="flex flex-col items-center justify-center">
-						<img src="/images/resume-scan-2.gif" alt="loading-resumes" className="w-50" />
+					<div role="status" className="flex flex-col items-center justify-center gap-3">
+						<img
+							src="/images/resume-scan-2.gif"
+							alt=""
+							className="aspect-square w-50 object-contain"
+						/>
+						<p className="text-gray-600">Loading your resumes…</p>
 					</div>
 				)}
 
