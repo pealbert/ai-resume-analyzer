@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "react-router typegen && tsc && vp build",
+		"build": "react-router typegen && tsc && node ./scripts/build.mjs",
 		"dev": "vp dev",
 		"preview": "vp preview",
 		"typecheck": "react-router typegen && tsc"
